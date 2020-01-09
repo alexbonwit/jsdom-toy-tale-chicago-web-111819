@@ -24,10 +24,38 @@ function fetchToys() {
 }
 
 function addToys(json) {
-  const toyDiv = document.querySelector("div#toy-collection");
   const toys = json;
 
-  console.log(toys);
+  toys.forEach(toy => {
+    renderToy(toy);
+  });
 }
 
+function renderToy(toy){
+  const toyDiv = document.querySelector("div#toy-collection");
+
+  const toyCard = document.createElement('div');
+  toyCard.className = 'card';
+
+  const h2 = document.createElement('h2');
+  h2.innerText = toy.name
+  toyCard.appendChild(h2);
+
+  const img = document.createElement('img');
+  img.src = toy.image;
+  img.className = 'toy-avatar';
+  toyCard.appendChild(img);
+
+  const p = document.createElement('p');
+  p.innerText = `${toy.likes} Likes`;
+  toyCard.appendChild(p);
+
+  const btn = document.createElement('button');
+  btn.className = 'like-btn';
+  btn.innerText = 'Like ♡';
+  toyCard.appendChild(btn);
+
+  
+  toyDiv.appendChild(toyCard);
+}
 main();
