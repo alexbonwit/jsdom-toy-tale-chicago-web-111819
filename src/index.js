@@ -13,7 +13,7 @@ function main(){
     })
 
     fetchToys();
-    newToy();
+    // newToy();
     addNewToyFormListener();
   })
 }
@@ -29,9 +29,9 @@ function newToy(toyData) {
     body: JSON.stringify(toyData)
   }
 
-  fetch('http://localhost:3000/toys', reqObj);
-    // .then(resp => resp.json())
-    // .then()
+  fetch('http://localhost:3000/toys', reqObj)
+    .then(resp => resp.json())
+    .then(renderToy(toyData)) 
 }
 
 function addNewToyFormListener(){
@@ -45,16 +45,12 @@ function addNewToyFormListener(){
       image: e.target[1].value,
       likes: 0
     }
-
+    
     newToy(newToyData);
 
   })
 }
 
-function renderNewToy(){
-  // render stuff after listening to create new toy FORM
-
-}
 
 
 function fetchToys() {
