@@ -14,3 +14,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
   })
 
 })
+
+function fetchToys() {
+  return fetch('http://localhost:3000/toys')
+    .then( resp => resp.json())
+    .then( addToys )
+}
+
+function addToys(json) {
+  const toyDiv = document.querySelector("div#toy-collection");
+  const toys = json["message"];
+  for (const toy in toys ) {
+    
+  }
+}
