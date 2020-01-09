@@ -3,8 +3,7 @@ function main(){
   document.addEventListener("DOMContentLoaded", ()=>{
     const addBtn = document.querySelector('#new-toy-btn')
     const toyForm = document.querySelector('.container')
-    addBtn.addEventListener('click', () => {
-      // hide & seek with the form
+    addBtn.addEventListener('click', () => { // hide & seek with the form
       addToy = !addToy
       if (addToy) {
         toyForm.style.display = 'block'
@@ -15,10 +14,11 @@ function main(){
 
     fetchToys();
     newToy();
+    addNewToyFormListener();
   })
 }
 
-function newToy() {
+function newToy(toyData) {
 
   reqObj = {
     method: "POST",
@@ -26,16 +26,34 @@ function newToy() {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify({
-      "name": "Jessie",
-      "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      "likes": 0
-    })
+    body: JSON.stringify(toyData)
   }
 
   fetch('http://localhost:3000/toys', reqObj);
     // .then(resp => resp.json())
     // .then()
+}
+
+function addNewToyFormListener(){
+  const form = document.querySelector('form.add-toy-form')
+  
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    
+    const newToyData = {
+      name: e.target[0].value,
+      image: e.target[1].value,
+      likes: 0
+    }
+
+    newToy(newToyData);
+
+  })
+}
+
+function renderNewToy(){
+  // render stuff after listening to create new toy FORM
+
 }
 
 
